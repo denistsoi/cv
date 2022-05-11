@@ -54,6 +54,32 @@
   margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
+  max-width: 55rem;
+}
+
+.name {
+  text-align: center;
+  
+  background: linear-gradient(to right, rgb(55, 125, 165) 20%, rgb(26, 55, 92) 40%, rgb(26, 17, 92) 60%, rgb(26, 0, 92) 80%);
+  background-size: 200% auto;
+  
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.listItem {
+  line-height: 1.5;
 }
 
 .code {
