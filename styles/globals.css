@@ -14,3 +14,14 @@ a {
 * {
   box-sizing: border-box;
 }
+
+:root {
+  --background-color: black;
+  --background-color-light: white;
+
+  --text-color: white;
+  --text-color-light: black;
+
+  --gradient: linear-gradient(to right, rgb(204, 190, 242) 0%, rgb(55, 125, 165) 20%, rgb(96, 147, 213) 40%, rgb(122, 166, 223) 60%, rgb(204, 190, 242) 80%);
+  --gradient-light: linear-gradient(to left, rgb(26, 0, 92) 0%, rgb(55, 125, 165) 20%, rgb(26, 55, 92) 40%, rgb(26, 17, 92) 60%, rgb(26, 0, 92) 80%);
+}
