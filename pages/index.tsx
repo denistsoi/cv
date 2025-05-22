@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -18,15 +17,10 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          I&apos;m a developer with 8+ years experience, and currently a Team Lead at Mox.<br />
-          If you&apos;d like to reach out to me, you can find my details below.
+          Engineer with 10+ years experience.<br />
+          Currently Building. In this world; we need builders.
         </p>
 
-        <ul>
-          <li className={styles.listItem}><Link href="https://www.linkedin.com/in/denistsoi/">Linkedin</Link></li>
-          <li className={styles.listItem}><Link href="https://www.github.com/denistsoi/">Github</Link></li>
-          <li className={styles.listItem}><Link href="https://stackoverflow.com/users/2312051/denis-tsoi">Stackoverflow</Link></li>
-        </ul>
       </main>
     </div>
   )
