@@ -19,7 +19,7 @@ const Home: NextPage = () => {
         <p className={styles.description}>
           Engineer with 10+ years experience.<br />
           Currently Building.<br />
-          In this world; we need builders.
+          In this world; we need more builders.
         </p>
 
       </main>
