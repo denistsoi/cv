@@ -13,7 +13,7 @@ const Home: NextPage = () => {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Hi there 👋🏻 I&apos;m <span className={styles.name}>Denis.</span>
+          Hi there <span className={styles.wave}>👋🏻</span> I&apos;m <span className={styles.name}>Denis.</span>
         </h1>
 
         <p className={styles.description}>
