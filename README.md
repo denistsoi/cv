@@ -1,13 +1,6 @@
-# CV
+# cv
 
-![screenshot](./screenshot.png)
-
-### Description
-
-Place to put contact info and a small resume site
-
-### author
-Denis Tsoi 
+A Next.js project for a personal CV/portfolio.
 
 ## Microbit Kids Class
 
@@ -42,4 +35,7 @@ This project includes a simple classroom link manager for Micro:bit kids classes
 - **Kids:** Go to `/classroom` to see and click the current week’s link.
 
 ---
-For more information on Upstash Redis, see the [Upstash Redis Docs](https://upstash.com/docs/redis/quick-start/nextjs). 
+For more information on Upstash Redis, see the [Upstash Redis Docs](https://upstash.com/docs/redis/quick-start/nextjs).
+
+### author
+Denis Tsoi 
