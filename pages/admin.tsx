@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Redis } from '@upstash/redis';
 
-const redis = Redis.fromEnv();
-const KEY = 'current_week_url';
+const ADMIN_PASSWORD = 'microbit';
+const AUTH_KEY = 'microbit_admin_authed';
 
 export default function Admin() {
   const [url, setUrl] = useState('');
@@ -11,12 +11,25 @@ export default function Admin() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [clearing, setClearing] = useState(false);
+  const [authed, setAuthed] = useState(false);
+  const [password, setPassword] = useState('');
+  const [pwError, setPwError] = useState('');
 
   useEffect(() => {
-    fetch('/api/classroom-url')
-      .then(res => res.json())
-      .then(data => setCurrentUrl(data.url || ''));
+    if (typeof window !== 'undefined') {
+      if (localStorage.getItem(AUTH_KEY) === '1') {
+        setAuthed(true);
+      }
+    }
   }, []);
+
+  useEffect(() => {
+    if (authed) {
+      fetch('/api/classroom-url')
+        .then(res => res.json())
+        .then(data => setCurrentUrl(data.url || ''));
+    }
+  }, [authed]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,9 +66,51 @@ export default function Admin() {
     setClearing(false);
   };
 
+  const handlePwSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === ADMIN_PASSWORD) {
+      localStorage.setItem(AUTH_KEY, '1');
+      setAuthed(true);
+      setPwError('');
+    } else {
+      setPwError('Incorrect password');
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem(AUTH_KEY);
+    setAuthed(false);
+    setPassword('');
+    setPwError('');
+  };
+
+  if (!authed) {
+    return (
+      <div style={{ maxWidth: 400, margin: '4rem auto', padding: 24, border: '1px solid #ccc', borderRadius: 8 }}>
+        <h2>Admin Login</h2>
+        <form onSubmit={handlePwSubmit}>
+          <input
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            style={{ width: '100%', padding: 8, marginBottom: 8 }}
+          />
+          <button type="submit" style={{ width: '100%', padding: 8 }}>
+            Login
+          </button>
+        </form>
+        {pwError && <div style={{ color: 'red', marginTop: 8 }}>{pwError}</div>}
+      </div>
+    );
+  }
+
   return (
     <div style={{ maxWidth: 500, margin: '2rem auto', padding: 24, border: '1px solid #ccc', borderRadius: 8 }}>
-      <h1>Admin: Set Classroom URL</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+        <h1 style={{ margin: 0 }}>Admin: Set Classroom URL</h1>
+        <button onClick={handleLogout} style={{ padding: '6px 12px', fontSize: 14 }}>Logout</button>
+      </div>
       <form onSubmit={handleSubmit} style={{ marginBottom: 24 }}>
         <input
           type="url"

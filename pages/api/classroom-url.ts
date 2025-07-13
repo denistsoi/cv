@@ -7,6 +7,7 @@ const KEY = 'current_week_url';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     // Fetch the current URL from Redis
+    console.log('Fetching URL from Redis');
     const url = await redis.get<string>(KEY);
     res.status(200).json({ url });
   } else if (req.method === 'POST') {
