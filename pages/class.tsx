@@ -1,23 +1,10 @@
 import { useEffect, useState } from 'react';
 
-// Pre-selected list of students
-const STUDENT_LIST = [
-  'Alice Johnson',
-  'Bob Smith',
-  'Charlie Brown',
-  'Diana Prince',
-  'Ethan Hunt',
-  'Fiona Green',
-  'George Wilson',
-  'Hannah Davis',
-  'Ian Thompson',
-  'Julia Roberts'
-];
-
 export default function Classroom() {
   const [url, setUrl] = useState('');
   const [loading, setLoading] = useState(true);
   const [selectedStudent, setSelectedStudent] = useState('');
+  const [studentList, setStudentList] = useState<string[]>([]);
   const [inWaitingRoom, setInWaitingRoom] = useState(true);
   const [activeSessions, setActiveSessions] = useState<string[]>([]);
   const [sessionError, setSessionError] = useState('');
@@ -68,17 +55,17 @@ export default function Classroom() {
         // Check for existing localStorage session
         const storedSession = getStoredSession();
 
-        // Fetch classroom URL and active sessions
-        const [urlData, sessionData] = await Promise.all([
+        // Fetch classroom URL, active sessions, and student list
+        const [urlData, sessionData, studentData] = await Promise.all([
           fetch('/api/classroom-url').then(res => res.json()),
-          fetch('/api/classroom-sessions').then(res => res.json())
+          fetch('/api/classroom-sessions').then(res => res.json()),
+          fetch('/api/student-list').then(res => res.json())
         ]);
 
         setUrl(urlData.url || '');
         setActiveSessions(sessionData.activeSessions || []);
-        setUrl(urlData.url || '');
-        setActiveSessions(sessionData.activeSessions || []);
         setRaisedHands(sessionData.raisedHands || []);
+        setStudentList(studentData.students || []);
         if (storedSession && storedSession.student) {
           const isValidSession = await validateStoredSession(storedSession);
 
@@ -261,7 +248,7 @@ export default function Classroom() {
             }}
           >
             <option value="">-- Select your name --</option>
-            {STUDENT_LIST.map((student) => (
+            {studentList.map((student) => (
               <option key={student} value={student} disabled={activeSessions.includes(student)}>
                 {student} {activeSessions.includes(student) ? '(Already in class)' : ''}
               </option>
