@@ -94,7 +94,7 @@ export default function TeacherDashboard() {
 
   const fetchClassNotes = async () => {
     try {
-      const response = await fetch('/api/class-notes');
+      const response = await fetch('/api/class-notes-fs');
       const data = await response.json();
       setNotes(data.notes || []);
     } catch (error) {
@@ -323,7 +323,7 @@ export default function TeacherDashboard() {
         ? { id: editingNoteId, title: noteTitle, content: noteContent }
         : { title: noteTitle, content: noteContent };
 
-      const res = await fetch('/api/class-notes', {
+      const res = await fetch('/api/class-notes-fs', {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -354,7 +354,7 @@ export default function TeacherDashboard() {
     if (!confirm('Are you sure you want to delete this note?')) return;
 
     try {
-      const res = await fetch('/api/class-notes', {
+      const res = await fetch('/api/class-notes-fs', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id }),

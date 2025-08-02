@@ -72,8 +72,8 @@ export default function Classroom() {
         setRaisedHands(sessionData.raisedHands || []);
         setStudentList(studentData.students || []);
         
-        // Fetch class notes
-        const notesResponse = await fetch('/api/class-notes');
+        // Fetch class notes from local storage
+        const notesResponse = await fetch('/api/class-notes-fs');
         const notesData = await notesResponse.json();
         setClassNotes(notesData.notes || []);
         if (storedSession && storedSession.student) {
@@ -542,6 +542,21 @@ export default function Classroom() {
                       <p style={{ marginBottom: 12, lineHeight: 1.6 }} {...props}>
                         {children}
                       </p>
+                    ),
+                    a: ({ children, href, ...props }) => (
+                      <a 
+                        href={href} 
+                        style={{ 
+                          color: '#0070f3', 
+                          textDecoration: 'underline',
+                          textUnderlineOffset: '2px'
+                        }} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        {...props}
+                      >
+                        {children}
+                      </a>
                     ),
                   }}
                 >
