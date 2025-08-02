@@ -27,7 +27,14 @@ export default function TeacherDashboard() {
   const [studentMessage, setStudentMessage] = useState('');
 
   // Active tab state
-  const [activeTab, setActiveTab] = useState<'sessions' | 'settings'>('sessions');
+  const [activeTab, setActiveTab] = useState<'sessions' | 'settings' | 'notes'>('sessions');
+  
+  // Class notes state
+  const [notes, setNotes] = useState<any[]>([]);
+  const [noteTitle, setNoteTitle] = useState('');
+  const [noteContent, setNoteContent] = useState('');
+  const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
+  const [noteMessage, setNoteMessage] = useState('');
 
   // Check authentication on mount
   useEffect(() => {
@@ -44,6 +51,7 @@ export default function TeacherDashboard() {
       fetchClassroomData();
       fetchStudentList();
       fetchCurrentUrl();
+      fetchClassNotes();
       
       // Refresh sessions every 5 seconds
       const interval = setInterval(fetchClassroomData, 5000);
@@ -81,6 +89,16 @@ export default function TeacherDashboard() {
       setCurrentUrl(data.url || '');
     } catch (error) {
       console.error('Error fetching classroom URL:', error);
+    }
+  };
+
+  const fetchClassNotes = async () => {
+    try {
+      const response = await fetch('/api/class-notes');
+      const data = await response.json();
+      setNotes(data.notes || []);
+    } catch (error) {
+      console.error('Error fetching class notes:', error);
     }
   };
 
@@ -294,6 +312,65 @@ export default function TeacherDashboard() {
     }
   };
 
+  // Class notes handlers
+  const handleNoteSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!noteTitle.trim() || !noteContent.trim()) return;
+
+    try {
+      const method = editingNoteId ? 'PUT' : 'POST';
+      const body = editingNoteId 
+        ? { id: editingNoteId, title: noteTitle, content: noteContent }
+        : { title: noteTitle, content: noteContent };
+
+      const res = await fetch('/api/class-notes', {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        setNoteTitle('');
+        setNoteContent('');
+        setEditingNoteId(null);
+        setNoteMessage(editingNoteId ? 'Note updated successfully!' : 'Note created successfully!');
+        fetchClassNotes();
+      } else {
+        setNoteMessage(data.error || 'Error saving note');
+      }
+    } catch (error) {
+      setNoteMessage('Error saving note');
+    }
+  };
+
+  const editNote = (note: any) => {
+    setEditingNoteId(note.id);
+    setNoteTitle(note.title);
+    setNoteContent(note.content);
+  };
+
+  const deleteNote = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this note?')) return;
+
+    try {
+      const res = await fetch('/api/class-notes', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
+
+      if (res.ok) {
+        setNoteMessage('Note deleted successfully!');
+        fetchClassNotes();
+      } else {
+        setNoteMessage('Error deleting note');
+      }
+    } catch (error) {
+      setNoteMessage('Error deleting note');
+    }
+  };
+
   // Authentication screen
   if (!authed) {
     return (
@@ -359,10 +436,25 @@ export default function TeacherDashboard() {
             color: activeTab === 'settings' ? 'white' : '#0070f3',
             border: 'none',
             borderBottom: activeTab === 'settings' ? '2px solid #0070f3' : '2px solid transparent',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            marginRight: 8
           }}
         >
           Settings
+        </button>
+        <button
+          onClick={() => setActiveTab('notes')}
+          style={{
+            padding: '12px 24px',
+            fontSize: 16,
+            backgroundColor: activeTab === 'notes' ? '#0070f3' : 'transparent',
+            color: activeTab === 'notes' ? 'white' : '#0070f3',
+            border: 'none',
+            borderBottom: activeTab === 'notes' ? '2px solid #0070f3' : '2px solid transparent',
+            cursor: 'pointer'
+          }}
+        >
+          Class Notes
         </button>
       </div>
 
@@ -591,6 +683,114 @@ export default function TeacherDashboard() {
                 </div>
               )}
             </div>
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'notes' && (
+        <div>
+          {/* Create/Edit Note Section */}
+          <div style={{ marginBottom: 32, padding: 16, border: '1px solid #ccc', borderRadius: 8 }}>
+            <h3>{editingNoteId ? 'Edit Class Note' : 'Create New Class Note'}</h3>
+            <form onSubmit={handleNoteSave}>
+              <input
+                type="text"
+                placeholder="Note Title"
+                value={noteTitle}
+                onChange={e => setNoteTitle(e.target.value)}
+                required
+                style={{ width: '100%', padding: 12, marginBottom: 12, fontSize: 16, borderRadius: 4, border: '1px solid #ccc' }}
+              />
+              <textarea
+                placeholder="Note Content (Markdown supported - use [ ] for checkboxes)"
+                value={noteContent}
+                onChange={e => setNoteContent(e.target.value)}
+                required
+                rows={10}
+                style={{ width: '100%', padding: 12, marginBottom: 12, fontSize: 16, borderRadius: 4, border: '1px solid #ccc', fontFamily: 'monospace' }}
+              />
+              <div style={{ fontSize: 14, color: '#666', marginBottom: 12 }}>
+                <strong>Markdown Tips:</strong>
+                <ul style={{ marginTop: 4 }}>
+                  <li>Use [ ] for checkboxes (students can check these)</li>
+                  <li>Use # for headings</li>
+                  <li>Use ** for bold text</li>
+                  <li>Use - or * for bullet points</li>
+                </ul>
+              </div>
+              <div style={{ display: 'flex', gap: 8 }}>
+                <button type="submit" style={{ flex: 1, padding: 12, fontSize: 16, backgroundColor: '#0070f3', color: 'white', border: 'none', borderRadius: 4, cursor: 'pointer' }}>
+                  {editingNoteId ? 'Update Note' : 'Create Note'}
+                </button>
+                {editingNoteId && (
+                  <button type="button" onClick={() => {
+                    setEditingNoteId(null);
+                    setNoteTitle('');
+                    setNoteContent('');
+                  }} style={{ padding: '12px 24px', fontSize: 16, backgroundColor: '#666', color: 'white', border: 'none', borderRadius: 4, cursor: 'pointer' }}>
+                    Cancel
+                  </button>
+                )}
+              </div>
+            </form>
+
+            {noteMessage && <div style={{ marginTop: 16, padding: 8, backgroundColor: '#e8f5e8', border: '1px solid #4caf50', borderRadius: 4, color: '#2e7d32' }}>{noteMessage}</div>}
+          </div>
+
+          {/* Existing Notes */}
+          <div style={{ padding: 16, border: '1px solid #ccc', borderRadius: 8 }}>
+            <h3>Class Notes ({notes.length})</h3>
+            {notes.length === 0 ? (
+              <p style={{ color: '#666' }}>No class notes yet. Create one above!</p>
+            ) : (
+              <div>
+                {notes.map((note) => (
+                  <div key={note.id} style={{ marginBottom: 16, padding: 16, backgroundColor: '#f9f9f9', borderRadius: 8, border: '1px solid #eee' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
+                      <div>
+                        <h4 style={{ margin: 0 }}>{note.title}</h4>
+                        <small style={{ color: '#666' }}>
+                          Updated: {new Date(note.updatedAt).toLocaleString()}
+                        </small>
+                      </div>
+                      <div style={{ display: 'flex', gap: 8 }}>
+                        <button
+                          onClick={() => editNote(note)}
+                          style={{
+                            padding: '6px 12px',
+                            fontSize: 14,
+                            backgroundColor: '#ff9800',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: 4,
+                            cursor: 'pointer'
+                          }}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => deleteNote(note.id)}
+                          style={{
+                            padding: '6px 12px',
+                            fontSize: 14,
+                            backgroundColor: '#f44336',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: 4,
+                            cursor: 'pointer'
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                    <div style={{ maxHeight: 100, overflow: 'hidden', color: '#666', fontSize: 14 }}>
+                      {note.content.substring(0, 200)}...
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       )}

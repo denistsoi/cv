@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export default function Classroom() {
   const [url, setUrl] = useState('');
@@ -10,6 +12,9 @@ export default function Classroom() {
   const [sessionError, setSessionError] = useState('');
   const [raisedHands, setRaisedHands] = useState<string[]>([]);
   const [handRaised, setHandRaised] = useState(false);
+  const [classNotes, setClassNotes] = useState<any[]>([]);
+  const [selectedNote, setSelectedNote] = useState<any | null>(null);
+  const [noteProgress, setNoteProgress] = useState<Record<string, boolean>>({});
 
   // localStorage helper functions
   const getStoredSession = () => {
@@ -66,6 +71,11 @@ export default function Classroom() {
         setActiveSessions(sessionData.activeSessions || []);
         setRaisedHands(sessionData.raisedHands || []);
         setStudentList(studentData.students || []);
+        
+        // Fetch class notes
+        const notesResponse = await fetch('/api/class-notes');
+        const notesData = await notesResponse.json();
+        setClassNotes(notesData.notes || []);
         if (storedSession && storedSession.student) {
           const isValidSession = await validateStoredSession(storedSession);
 
@@ -221,6 +231,50 @@ export default function Classroom() {
     }
   };
 
+  const loadNoteProgress = (noteId: string) => {
+    // Load progress from localStorage
+    const savedProgress = localStorage.getItem(`note-progress-${noteId}`);
+    if (savedProgress) {
+      try {
+        const parsed = JSON.parse(savedProgress);
+        setNoteProgress(parsed);
+      } catch (error) {
+        console.error('Error parsing saved progress:', error);
+        setNoteProgress({});
+      }
+    } else {
+      setNoteProgress({});
+    }
+  };
+
+  const selectNote = (note: any) => {
+    setSelectedNote(note);
+    setNoteProgress({}); // Clear previous progress
+    loadNoteProgress(note.id); // Always load progress, even without student selected
+  };
+
+  const updateCheckbox = (checkboxId: string, checked: boolean) => {
+    if (!selectedNote) {
+      console.log('Cannot update checkbox - missing note');
+      return;
+    }
+
+    console.log('Updating checkbox:', { checkboxId, checked, currentProgress: noteProgress });
+    
+    // Update local state immediately
+    const updatedProgress = { ...noteProgress, [checkboxId]: checked };
+    console.log('Updated progress:', updatedProgress);
+    setNoteProgress(updatedProgress);
+
+    // Save to localStorage
+    try {
+      localStorage.setItem(`note-progress-${selectedNote.id}`, JSON.stringify(updatedProgress));
+      console.log('Saved to localStorage');
+    } catch (error) {
+      console.error('Error saving progress to localStorage:', error);
+    }
+  };
+
   if (loading) {
     return (
       <div style={{ maxWidth: 500, margin: '2rem auto', padding: 24, border: '1px solid #ccc', borderRadius: 8 }}>
@@ -296,9 +350,10 @@ export default function Classroom() {
   }
 
   return (
-    <div style={{ maxWidth: 500, margin: '2rem auto', padding: 24, border: '1px solid #ccc', borderRadius: 8 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-        <h1>Welcome, {selectedStudent}!</h1>
+    <div style={{ maxWidth: 900, margin: '2rem auto', padding: 24 }}>
+      <div style={{ padding: 24, border: '1px solid #ccc', borderRadius: 8, marginBottom: 32 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+          <h1>Welcome, {selectedStudent}!</h1>
         <button
           onClick={confirmLogout}
           style={{
@@ -351,12 +406,164 @@ export default function Classroom() {
         )}
       </div>
 
-      {url ? (
-        <a href={url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 20, color: '#0070f3' }}>
-          Click here to join the class
-        </a>
-      ) : (
-        <div>No classroom link has been set yet. Please check back soon!</div>
+        {url ? (
+          <a href={url} target="_blank" rel="noopener noreferrer" style={{ fontSize: 20, color: '#0070f3' }}>
+            Click here to join the class
+          </a>
+        ) : (
+          <div>No classroom link has been set yet. Please check back soon!</div>
+        )}
+      </div>
+
+      {/* Class Notes Section */}
+      {classNotes.length > 0 && (
+        <div style={{ padding: 24, border: '1px solid #ccc', borderRadius: 8 }}>
+          <h2>Class Notes</h2>
+          
+          {!selectedNote ? (
+            <div>
+              <p>Select a note to view:</p>
+              {classNotes.map((note) => (
+                <div
+                  key={note.id}
+                  onClick={() => selectNote(note)}
+                  style={{
+                    padding: 12,
+                    marginBottom: 8,
+                    backgroundColor: '#f9f9f9',
+                    borderRadius: 4,
+                    cursor: 'pointer',
+                    border: '1px solid #eee',
+                    transition: 'all 0.2s'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#e3f2fd';
+                    e.currentTarget.style.borderColor = '#2196f3';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#f9f9f9';
+                    e.currentTarget.style.borderColor = '#eee';
+                  }}
+                >
+                  <h4 style={{ margin: '0 0 4px 0' }}>{note.title}</h4>
+                  <small style={{ color: '#666' }}>
+                    Updated: {new Date(note.updatedAt).toLocaleDateString()}
+                  </small>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div>
+              <button
+                onClick={() => setSelectedNote(null)}
+                style={{
+                  padding: '8px 16px',
+                  marginBottom: 16,
+                  fontSize: 14,
+                  backgroundColor: '#666',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: 4,
+                  cursor: 'pointer'
+                }}
+              >
+                ← Back to Notes
+              </button>
+              
+              <h3>{selectedNote.title}</h3>
+              
+              <div style={{ 
+                padding: 24,
+                backgroundColor: '#f9f9f9',
+                borderRadius: 8,
+                marginTop: 16,
+                maxHeight: '70vh',
+                overflowY: 'auto'
+              }}>
+                {(() => {
+                  let checkboxCounter = 0;
+                  
+                  // Custom checkbox component
+                  const CheckboxComponent = ({ checkboxId }: { checkboxId: string }) => {
+                    return (
+                      <input
+                        type="checkbox"
+                        checked={noteProgress[checkboxId] || false}
+                        onChange={(e) => updateCheckbox(checkboxId, e.target.checked)}
+                        style={{ marginRight: 8, cursor: 'pointer' }}
+                      />
+                    );
+                  };
+                  
+                  return (
+                    <ReactMarkdown
+                      key={selectedNote.id} // Force re-render when note changes
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        input: ({ node, checked, ...props }) => {
+                          if (props.type === 'checkbox') {
+                            // Use a counter-based ID for stable checkbox identification
+                            const id = `checkbox-${checkboxCounter++}`;
+                            return <CheckboxComponent checkboxId={id} />;
+                          }
+                          return <input {...props} />;
+                        },
+                    li: ({ children, ...props }) => (
+                      <li style={{ marginBottom: 8 }} {...props}>
+                        {children}
+                      </li>
+                    ),
+                    ul: ({ children, ...props }) => (
+                      <ul style={{ marginLeft: 20 }} {...props}>
+                        {children}
+                      </ul>
+                    ),
+                    ol: ({ children, ...props }) => (
+                      <ol style={{ marginLeft: 20 }} {...props}>
+                        {children}
+                      </ol>
+                    ),
+                    h1: ({ children, ...props }) => (
+                      <h1 style={{ fontSize: 24, marginBottom: 16 }} {...props}>
+                        {children}
+                      </h1>
+                    ),
+                    h2: ({ children, ...props }) => (
+                      <h2 style={{ fontSize: 20, marginBottom: 12 }} {...props}>
+                        {children}
+                      </h2>
+                    ),
+                    h3: ({ children, ...props }) => (
+                      <h3 style={{ fontSize: 18, marginBottom: 8 }} {...props}>
+                        {children}
+                      </h3>
+                    ),
+                    p: ({ children, ...props }) => (
+                      <p style={{ marginBottom: 12, lineHeight: 1.6 }} {...props}>
+                        {children}
+                      </p>
+                    ),
+                  }}
+                >
+                  {selectedNote.content}
+                </ReactMarkdown>
+                  );
+                })()}
+              </div>
+              
+              <div style={{
+                marginTop: 16,
+                padding: 12,
+                backgroundColor: '#e8f5e9',
+                borderRadius: 4,
+                fontSize: 14,
+                color: '#2e7d32'
+              }}>
+                ✓ Your progress is saved locally in your browser
+              </div>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
