@@ -7,8 +7,29 @@ interface ClassNote {
   id: string;
   title: string;
   content: string;
+  teacherNotes?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+// Helper function to extract teacher notes from content
+function extractTeacherNotes(content: string): { studentContent: string; teacherContent: string } {
+  const teacherStartRegex = /<!-- TEACHER-START -->([\s\S]*?)<!-- TEACHER-END -->/g;
+  let teacherContent = '';
+  let studentContent = content;
+  
+  let match;
+  while ((match = teacherStartRegex.exec(content)) !== null) {
+    teacherContent += match[1].trim() + '\n\n';
+  }
+  
+  // Remove teacher sections from student content
+  studentContent = studentContent.replace(teacherStartRegex, '');
+  
+  return {
+    studentContent: studentContent.trim(),
+    teacherContent: teacherContent.trim()
+  };
 }
 
 export default async function handler(
@@ -18,6 +39,7 @@ export default async function handler(
   if (req.method === 'GET') {
     try {
       const notesDir = path.join(process.cwd(), 'public', 'class-notes');
+      const isTeacher = req.query.isTeacher === 'true';
       
       // Ensure directory exists
       if (!fs.existsSync(notesDir)) {
@@ -35,13 +57,26 @@ export default async function handler(
         const stats = fs.statSync(filePath);
         const id = path.basename(file, '.md');
         
-        notes.push({
+        // Extract teacher notes from content
+        const { studentContent, teacherContent } = extractTeacherNotes(content);
+        
+        // Combine frontmatter teacherNotes with extracted teacher content
+        const allTeacherNotes = [data.teacherNotes, teacherContent].filter(Boolean).join('\n\n').trim();
+        
+        const note: ClassNote = {
           id,
           title: data.title || id.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-          content: content.trim(),
+          content: studentContent,
           createdAt: data.createdAt || stats.birthtime.toISOString(),
           updatedAt: data.updatedAt || stats.mtime.toISOString()
-        });
+        };
+        
+        // Only include teacher notes if requested
+        if (isTeacher && allTeacherNotes) {
+          note.teacherNotes = allTeacherNotes;
+        }
+        
+        notes.push(note);
       }
       
       notes.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
@@ -53,7 +88,7 @@ export default async function handler(
     }
   } else if (req.method === 'POST') {
     try {
-      const { title, content } = req.body;
+      const { title, content, teacherNotes } = req.body;
       
       if (!title || !content) {
         return res.status(400).json({ error: 'Title and content are required' });
@@ -62,11 +97,18 @@ export default async function handler(
       const id = title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
       const timestamp = new Date().toISOString();
       
-      const frontmatter = `---
+      let frontmatter = `---
 title: ${title}
 createdAt: ${timestamp}
 updatedAt: ${timestamp}
----
+`;
+      
+      if (teacherNotes) {
+        frontmatter += `teacherNotes: ${JSON.stringify(teacherNotes)}
+`;
+      }
+      
+      frontmatter += `---
 
 `;
       
@@ -83,6 +125,10 @@ updatedAt: ${timestamp}
         updatedAt: timestamp
       };
       
+      if (teacherNotes) {
+        note.teacherNotes = teacherNotes;
+      }
+      
       res.status(201).json({ note });
     } catch (error) {
       console.error('Error creating class note:', error);
@@ -90,7 +136,7 @@ updatedAt: ${timestamp}
     }
   } else if (req.method === 'PUT') {
     try {
-      const { id, title, content } = req.body;
+      const { id, title, content, teacherNotes } = req.body;
       
       if (!id || !title || !content) {
         return res.status(400).json({ error: 'ID, title and content are required' });
@@ -106,11 +152,20 @@ updatedAt: ${timestamp}
       const { data } = matter(fileContent);
       
       const updatedTimestamp = new Date().toISOString();
-      const frontmatter = `---
+      let frontmatter = `---
 title: ${title}
 createdAt: ${data.createdAt || updatedTimestamp}
 updatedAt: ${updatedTimestamp}
----
+`;
+      
+      // Preserve or update teacher notes
+      const notesToSave = teacherNotes !== undefined ? teacherNotes : data.teacherNotes;
+      if (notesToSave) {
+        frontmatter += `teacherNotes: ${JSON.stringify(notesToSave)}
+`;
+      }
+      
+      frontmatter += `---
 
 `;
       
@@ -124,6 +179,10 @@ updatedAt: ${updatedTimestamp}
         createdAt: data.createdAt || updatedTimestamp,
         updatedAt: updatedTimestamp
       };
+      
+      if (notesToSave) {
+        updatedNote.teacherNotes = notesToSave;
+      }
       
       res.status(200).json({ note: updatedNote });
     } catch (error) {

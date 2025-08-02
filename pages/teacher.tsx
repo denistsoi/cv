@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 const ADMIN_PASSWORD = 'microbit';
 const AUTH_KEY = 'microbit_teacher_authed';
@@ -94,7 +96,7 @@ export default function TeacherDashboard() {
 
   const fetchClassNotes = async () => {
     try {
-      const response = await fetch('/api/class-notes-fs');
+      const response = await fetch('/api/class-notes-fs?isTeacher=true');
       const data = await response.json();
       setNotes(data.notes || []);
     } catch (error) {
@@ -785,8 +787,51 @@ export default function TeacherDashboard() {
                       </div>
                     </div>
                     <div style={{ maxHeight: 100, overflow: 'hidden', color: '#666', fontSize: 14 }}>
-                      {note.content.substring(0, 200)}...
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          h1: ({node, ...props}) => <div style={{ fontWeight: 'bold', marginBottom: 4 }}>{props.children}</div>,
+                          h2: ({node, ...props}) => <div style={{ fontWeight: 'bold', marginBottom: 4 }}>{props.children}</div>,
+                          h3: ({node, ...props}) => <div style={{ fontWeight: 'bold', marginBottom: 4 }}>{props.children}</div>,
+                        }}
+                      >
+                        {(() => {
+                          // Extract just the first two headers
+                          const lines = note.content.split('\n');
+                          const headers = [];
+                          let count = 0;
+                          
+                          for (const line of lines) {
+                            if (line.startsWith('#') && count < 2) {
+                              headers.push(line);
+                              count++;
+                            }
+                            if (count >= 2) break;
+                          }
+                          
+                          return headers.join('\n') || note.content.substring(0, 100) + '...';
+                        })()}
+                      </ReactMarkdown>
                     </div>
+                    {note.teacherNotes && (
+                      <div style={{ marginTop: 12, padding: 12, backgroundColor: '#fff3e0', border: '1px solid #ff9800', borderRadius: 4 }}>
+                        <strong style={{ color: '#e65100' }}>Teacher Notes:</strong>
+                        <div style={{ marginTop: 8, color: '#666', fontSize: 14 }}>
+                          <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                              a: ({ node, ...props }) => (
+                                <a {...props} target="_blank" rel="noopener noreferrer" style={{ color: '#ff6600', textDecoration: 'underline' }}>
+                                  {props.children}
+                                </a>
+                              ),
+                            }}
+                          >
+                            {note.teacherNotes}
+                          </ReactMarkdown>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>

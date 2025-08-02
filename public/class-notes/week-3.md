@@ -9,8 +9,8 @@
 
 ### Activities Completed
 
-- [ ] **Temperature Detector** - Used the built-in temperature sensor to measure and display temperature
-- [ ] **Compass Direction** - Worked with the magnetometer to show compass directions
+- [ ] **Temperature Detector** - Used the built-in temperature sensor to measure and display temperature (https://makecode.microbit.org/93425-53338-63371-27009)
+- [ ] **Compass Direction** - Worked with the magnetometer to show compass directions (https://makecode.microbit.org/95993-15381-50595-56794)
 
 ### Key Skills Developed
 
