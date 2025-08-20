@@ -1,0 +1,35 @@
+# Denis Tsoi - Software Engineer & Developer
+
+## Professional Summary
+Denis Tsoi is a Hong Kong-based software engineer currently working at preferrd.io, with a strong background in frontend development and fintech. He previously served as a Senior Engineer, Frontend at Mox Bank (Standard Chartered's digital bank), demonstrating expertise in modern banking technology solutions.
+
+## Career Journey
+Denis made a successful career transition from being a senior dealer at a precious metals brokerage to becoming a full-time, full-stack web developer. This career pivot was driven by his passion for technology, a decision he has never regretted. He's a General Assembly Alumni, having completed the first Front-End Web Development course based in Hong Kong.
+
+## Technical Expertise
+- **Frontend Development**: Extensive experience with modern frontend technologies
+- **Full-Stack Development**: JavaScript, Node.js, HTML5, Sass
+- **Cloud & Infrastructure**: Experience with Flask, React, and AWS technologies
+- **Database & APIs**: SQL, Data Modeling, API Development and Documentation
+- **DevOps**: Server Deployment and Containerization
+- **Identity & Access Management**: Security-focused development practices
+
+## Notable Achievements
+- **Stack Overflow Contributor**: 11+ years of active participation with 10,442 reputation points, reaching 941k people with contributions
+- **Community Involvement**: Active member of Think.HK and Hong Kong Web Dev Group
+- **Educational Background**: Completed Udacity Full Stack Web Developer program in 2020
+
+## Professional Philosophy
+Denis focuses on "working on the difficult and challenging problems," indicating his preference for complex technical challenges and innovative solutions.
+
+## Online Presence
+- **Personal Website**: dtsoi.com
+- **LinkedIn**: linkedin.com/in/denistsoi
+- **Stack Overflow**: Active contributor with significant community impact
+- **GitHub**: Maintains active development profile
+- **Speaking**: Has given presentations on UI/UX and mobile-first development
+
+## Location & Connections
+Based in Hong Kong SAR with 500+ professional connections and 2K+ followers, Denis is well-connected within the regional tech community.
+
+Denis represents the modern software engineer who combines technical expertise with business acumen, having successfully transitioned between industries while maintaining a commitment to continuous learning and community contribution.
