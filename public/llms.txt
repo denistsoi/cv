@@ -1,18 +1,10 @@
 # Denis Tsoi - Software Engineer & Developer
 
 ## Professional Summary
-Denis Tsoi is a Hong Kong-based software engineer currently working at preferrd.io, with a strong background in frontend development and fintech. He previously served as a Senior Engineer, Frontend at Mox Bank (Standard Chartered's digital bank), demonstrating expertise in modern banking technology solutions.
+Denis Tsoi is the CTO at preferrd.io, with a strong background in frontend development and fintech. He previously served as a Staff Engineer, Frontend at Mox Bank (Standard Chartered's digital bank), demonstrating expertise in modern banking technology solutions.
 
 ## Career Journey
 Denis made a successful career transition from being a senior dealer at a precious metals brokerage to becoming a full-time, full-stack web developer. This career pivot was driven by his passion for technology, a decision he has never regretted. He's a General Assembly Alumni, having completed the first Front-End Web Development course based in Hong Kong.
-
-## Technical Expertise
-- **Frontend Development**: Extensive experience with modern frontend technologies
-- **Full-Stack Development**: JavaScript, Node.js, HTML5, Sass
-- **Cloud & Infrastructure**: Experience with Flask, React, and AWS technologies
-- **Database & APIs**: SQL, Data Modeling, API Development and Documentation
-- **DevOps**: Server Deployment and Containerization
-- **Identity & Access Management**: Security-focused development practices
 
 ## Notable Achievements
 - **Stack Overflow Contributor**: 11+ years of active participation with 10,442 reputation points, reaching 941k people with contributions
