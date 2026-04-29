@@ -42,8 +42,12 @@ const title = "Denis Tsoi — dtsoi.com";
 
     <main class="shell">
       <div class="eyebrow">
+        <span>denis tsoi</span>
+      </div>
+
+      <div class="status">
         <span class="dot"></span>
-        <span>denis tsoi · portfolio · '26</span>
+        <span>Currently on leave</span>
       </div>
 
       <h1 class="hero">
@@ -53,8 +57,8 @@ const title = "Denis Tsoi — dtsoi.com";
       </h1>
 
       <p class="lede">
-        Engineer. Currently on leave. I help startups and clients turn rough
-        specs into systems that run in production for years. Available
+        Engineer. I help startups and clients turn rough specs into systems
+        that run in production for years. Available
         <span class="accent">Q4 2026</span>.
       </p>
 
@@ -215,14 +219,14 @@ const title = "Denis Tsoi — dtsoi.com";
         --bg-base: rgba(26, 20, 16, 0.5);
       }
       :root[data-theme="light"] {
-        --fg: #1f1810;
-        --fg-2: #4a3f2e;
-        --fg-3: #6a6050;
-        --line: rgba(31, 24, 16, 0.2);
-        --line-2: rgba(31, 24, 16, 0.1);
-        --glass: rgba(245, 237, 217, 0.55);
-        --accent: #b8860b;
-        --bg-base: rgba(245, 237, 217, 0.5);
+        --fg: #14100a;
+        --fg-2: #3a3220;
+        --fg-3: #4a4232;
+        --line: rgba(20, 16, 10, 0.32);
+        --line-2: rgba(20, 16, 10, 0.18);
+        --glass: rgba(248, 242, 226, 0.82);
+        --accent: #6b4d00;
+        --bg-base: rgba(248, 242, 226, 0.85);
       }
 
       * {
@@ -240,8 +244,8 @@ const title = "Denis Tsoi — dtsoi.com";
         text-rendering: optimizeLegibility;
       }
       body {
-        min-height: 100vh;
-        padding: 20%;
+        min-height: 100dvh;
+        padding: 5vh 20vw;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -309,26 +313,45 @@ const title = "Denis Tsoi — dtsoi.com";
         letter-spacing: 0.14em;
         text-transform: uppercase;
         color: var(--fg-2);
-        display: inline-flex;
+        display: flex;
+        width: fit-content;
+        margin: 0 auto 20px;
         align-items: center;
         gap: 10px;
-        margin-bottom: 56px;
       }
-      .eyebrow .dot {
+      .status {
+        display: flex;
+        width: fit-content;
+        margin: 0 auto 40px;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 14px;
+        border: 0.5px solid var(--line-2);
+        border-radius: 999px;
+        background: var(--glass);
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--fg-2);
+      }
+      .dot {
         width: 7px;
         height: 7px;
         border-radius: 50%;
         background: var(--accent);
-        box-shadow: 0 0 0 3px rgba(255, 201, 107, 0.18);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
         animation: pulse 2.6s ease-in-out infinite;
       }
       @keyframes pulse {
         0%,
         100% {
-          box-shadow: 0 0 0 3px rgba(255, 201, 107, 0.18);
+          box-shadow: 0 0 0 3px
+            color-mix(in srgb, var(--accent) 25%, transparent);
         }
         50% {
-          box-shadow: 0 0 0 6px rgba(255, 201, 107, 0.05);
+          box-shadow: 0 0 0 6px
+            color-mix(in srgb, var(--accent) 8%, transparent);
         }
       }
 
