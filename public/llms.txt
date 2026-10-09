@@ -51,19 +51,19 @@ Explaining technology so people can use it is half of forward-deployed work — 
 
 ### Speaking (11 talks & workshops, 2013–2017)
 
-Speaker at Hong Kong Web Developers (HKWD) and Code Conf. [All slides](https://denistsoi.github.io/talks/)
+Speaker at Hong Kong Web Developers (HKWD), Code Conf HK, Women Who Code HK and FinHack. [All slides](https://denistsoi.github.io/talks/)
 
 - 2017 — [From Junior to Senior Developer: Lone Wolf to Wolf Pack](https://hongkong.codeconf.io/2017/) (talk, Hong Kong Code Conf, 22 Oct 2017): what makes a successful senior developer, frameworks to self-evaluate career progression, and forming "packs" that shape company culture and build sustainable support networks.
-- 2017 — [UI/UX: Mobile First](https://denistsoi.github.io/talks/2017-ux-finhack/) (talk, FinHack)
-- 2017 — [Docker Workshop](https://denistsoi.github.io/talks/2017-devops/) (workshop)
-- 2017 — [Git Workshop](https://denistsoi.github.io/talks/2017-git/) (workshop)
-- 2016 — [Easy as Pi](https://denistsoi.github.io/talks/2016-easy-as-pi/) (ongoing project)
-- 2016 — [Laravel Setup](https://denistsoi.github.io/talks/2016-laravel/) (talk)
-- 2016 — [Maps](https://denistsoi.github.io/talks/2016-maps/) (talk)
-- 2014 — [JS 102](https://denistsoi.github.io/talks/2014-js102/) (talk)
-- 2014 — [Sass](https://denistsoi.github.io/talks/2014-sass) (talk)
-- 2013 — [WTF CSS3D](https://denistsoi.github.io/talks/2013-wtf-css/) (talk)
-- 2013 — [WTF Three.js](https://denistsoi.github.io/talks/2013-threejs/) (talk)
+- 2017 — [UI/UX: Mobile First](https://denistsoi.github.io/talks/2017-ux-finhack/) (talk, FinHack): from skeuomorphism to flat design, principles for good mobile and desktop UX, and when to break the rules, for hackathon teams in fintech, insurance and regtech.
+- 2017 — [Docker Workshop](https://denistsoi.github.io/talks/2017-devops/) (workshop): hands-on from hello-world to networked containers, Docker Compose, and scaling a service across a Docker Swarm.
+- 2017 — [Git Workshop](https://denistsoi.github.io/talks/2017-git/) (workshop, EnergyBox): Git from the terminal for the team: init, clone, commit, amend, reset, remotes and tagging releases.
+- 2016 — [Easy as Pi](https://denistsoi.github.io/talks/2016-easy-as-pi/) (ongoing project): DevOps 101 on a Raspberry Pi cluster: building the rig, ARM distros like Hypriot, and untangling Docker, Kubernetes and orchestration jargon.
+- 2016 — [Laravel Setup](https://denistsoi.github.io/talks/2016-laravel/) (talk): setting up PHP, Composer and Laravel on macOS, from a front-end and Node developer's point of view.
+- 2016 — [Maps](https://denistsoi.github.io/talks/2016-maps/) (talk): reviewing web mapping tools (Cesium, Mapbox, Deck.gl, D3, Three.js and more) and choosing a renderer that conveys meaning without overloading the viewer.
+- 2014 — [JS 102](https://denistsoi.github.io/talks/2014-js102/) (talk): for junior developers: objects, constructors and the prototype pattern, building up to a small jQuery-style library.
+- 2014 — [Sass](https://denistsoi.github.io/talks/2014-sass) (talk, Women Who Code HK): Sass as CSS on steroids: nesting, variables, mixins, extends and partials, part of a front-end series.
+- 2013 — [WTF CSS3D](https://denistsoi.github.io/talks/2013-wtf-css/) (talk, HKWD): CSS 3D transforms with live CodePen demos, why to favour CSS classes over jQuery animation, and where CSS 3D stops scaling.
+- 2013 — [WTF Three.js](https://denistsoi.github.io/talks/2013-threejs/) (talk, HKWD): an intro to WebGL and Three.js: the graphics pipeline, cameras, lights, meshes and materials, then live code.
 
 ## Education
 

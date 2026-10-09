@@ -184,16 +184,76 @@ const codeconf = {
   body: "What makes a successful senior developer, frameworks to self-evaluate your career progression, and how to form \"packs\" that shape company culture and build sustainable support networks.",
 };
 const talks = [
-  { year: "2017", title: "UI/UX: Mobile First", kind: "TALK · FINHACK", slug: "2017-ux-finhack/" },
-  { year: "2017", title: "Docker Workshop", kind: "WORKSHOP", slug: "2017-devops/" },
-  { year: "2017", title: "Git Workshop", kind: "WORKSHOP", slug: "2017-git/" },
-  { year: "2016", title: "Easy as Pi", kind: "ONGOING PROJECT", slug: "2016-easy-as-pi/" },
-  { year: "2016", title: "Laravel Setup", kind: "TALK", slug: "2016-laravel/" },
-  { year: "2016", title: "Maps", kind: "TALK", slug: "2016-maps/" },
-  { year: "2014", title: "JS 102", kind: "TALK", slug: "2014-js102/" },
-  { year: "2014", title: "Sass", kind: "TALK", slug: "2014-sass" },
-  { year: "2013", title: "WTF CSS3D", kind: "TALK", slug: "2013-wtf-css/" },
-  { year: "2013", title: "WTF Three.js", kind: "TALK", slug: "2013-threejs/" },
+  {
+    year: "2017",
+    title: "UI/UX: Mobile First",
+    kind: "TALK · FINHACK",
+    slug: "2017-ux-finhack/",
+    desc: "From skeuomorphism to flat design, principles for good mobile and desktop UX, and when to break the rules, for hackathon teams in fintech, insurance and regtech.",
+  },
+  {
+    year: "2017",
+    title: "Docker Workshop",
+    kind: "WORKSHOP",
+    slug: "2017-devops/",
+    desc: "Hands-on from hello-world to networked containers, Docker Compose, and scaling a service across a Docker Swarm.",
+  },
+  {
+    year: "2017",
+    title: "Git Workshop",
+    kind: "WORKSHOP · ENERGYBOX",
+    slug: "2017-git/",
+    desc: "Git from the terminal for the team: init, clone, commit, amend, reset, remotes and tagging releases.",
+  },
+  {
+    year: "2016",
+    title: "Easy as Pi",
+    kind: "ONGOING PROJECT",
+    slug: "2016-easy-as-pi/",
+    desc: "DevOps 101 on a Raspberry Pi cluster: building the rig, ARM distros like Hypriot, and untangling Docker, Kubernetes and orchestration jargon.",
+  },
+  {
+    year: "2016",
+    title: "Laravel Setup",
+    kind: "TALK",
+    slug: "2016-laravel/",
+    desc: "Setting up PHP, Composer and Laravel on macOS, written from a front-end and Node developer's point of view.",
+  },
+  {
+    year: "2016",
+    title: "Maps",
+    kind: "TALK",
+    slug: "2016-maps/",
+    desc: "Reviewing web mapping tools (Cesium, Mapbox, Deck.gl, D3, Three.js and more) and choosing a renderer that conveys meaning without overloading the viewer.",
+  },
+  {
+    year: "2014",
+    title: "JS 102",
+    kind: "TALK",
+    slug: "2014-js102/",
+    desc: "For junior developers: objects, constructors and the prototype pattern, building up to a small jQuery-style library.",
+  },
+  {
+    year: "2014",
+    title: "Sass",
+    kind: "TALK · WOMEN WHO CODE HK",
+    slug: "2014-sass",
+    desc: "Sass as CSS on steroids: nesting, variables, mixins, extends and partials, part of a front-end series.",
+  },
+  {
+    year: "2013",
+    title: "WTF CSS3D",
+    kind: "TALK · HKWD",
+    slug: "2013-wtf-css/",
+    desc: "CSS 3D transforms with live CodePen demos, why to favour CSS classes over jQuery animation, and where CSS 3D stops scaling.",
+  },
+  {
+    year: "2013",
+    title: "WTF Three.js",
+    kind: "TALK · HKWD",
+    slug: "2013-threejs/",
+    desc: "An intro to WebGL and Three.js: the graphics pipeline, cameras, lights, meshes and materials, then live code.",
+  },
 ];
 
 const links = [
@@ -515,7 +575,7 @@ TSOI</h1>
             <div class="talk-list">
               <a class="talk talk-feature" href={codeconf.href}>
                 <span class="talk-year">{codeconf.year}</span>
-                <span class="talk-feature-main">
+                <span class="talk-main">
                   <span class="talk-title">{codeconf.title}</span>
                   <span class="talk-desc">{codeconf.body}</span>
                 </span>
@@ -528,7 +588,10 @@ TSOI</h1>
                 talks.map((t) => (
                   <a class="talk" href={talksUrl + t.slug}>
                     <span class="talk-year">{t.year}</span>
-                    <span class="talk-title">{t.title}</span>
+                    <span class="talk-main">
+                      <span class="talk-title">{t.title}</span>
+                      <span class="talk-desc">{t.desc}</span>
+                    </span>
                     <span class="talk-kind">{t.kind}</span>
                     <svg width="14" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                       <path d="M0 5h16M12 1l4 4-4 4" />
@@ -1375,9 +1438,10 @@ TSOI</h1>
         flex: 1 0 max(50%, 300px);
         min-width: 0;
         display: flex;
+        flex-wrap: wrap;
         align-items: baseline;
-        gap: 16px;
-        padding: 14px 20px;
+        gap: 6px 16px;
+        padding: 18px 20px;
         min-height: 44px;
         border-bottom: 1px dashed var(--ink);
       }
@@ -1398,23 +1462,29 @@ TSOI</h1>
       }
       .talk-feature {
         flex-basis: 100%;
-        flex-wrap: wrap;
-        padding-block: 18px;
       }
-      .talk-feature-main {
-        flex: 1 1 320px;
+
+      .talk-main {
+        flex: 1 1 200px;
         min-width: 0;
         display: flex;
         flex-direction: column;
         gap: 6px;
       }
+      .talk-feature .talk-main {
+        flex-basis: 320px;
+      }
       .talk-feature .talk-title {
         font-size: 15px;
       }
       .talk-desc {
-        font-size: 13px;
+        font-size: 12px;
         line-height: 1.6;
+        letter-spacing: 0.02em;
         max-width: 720px;
+      }
+      .talk-feature .talk-desc {
+        font-size: 13px;
       }
       .talk-kind {
         font-size: 10px;
