@@ -10,7 +10,8 @@ const nav = [
   { href: "#why", label: "01 WHY ME" },
   { href: "#work", label: "02 DEPLOYMENTS" },
   { href: "#experience", label: "03 EXPERIENCE" },
-  { href: "#contact", label: "04 CONTACT" },
+  { href: "#community", label: "04 COMMUNITY" },
+  { href: "#contact", label: "05 CONTACT" },
 ];
 
 const brief = [
@@ -132,6 +133,67 @@ const experience = [
     org: "ACETOP, CHANCELLOR — PRECIOUS METALS — HONG KONG",
     body: "Client-facing sales and precious metals OTC dealing before moving into engineering.",
   },
+];
+
+const teaching = [
+  {
+    label: "C-01 · REFUGEEK · BSD ACADEMY",
+    years: "2018",
+    fig: "FIG. C1 — CODE, THEN RESETTLE",
+    title: "Teaching code to refugees",
+    body: "Taught web development to refugees in Hong Kong through Refugeek, BSD Academy's follow-on programme that prepares students for the job market wherever they're resettling next.",
+    tags: ["INSTRUCTOR", "WEB DEV", "ADULT LEARNERS"],
+  },
+  {
+    label: "C-02 · GRASSROOTS FUTURE · OPERATION SANTA CLAUS",
+    years: "2025",
+    fig: "FIG. C2 — CARDBOARD ROBOT",
+    title: "Te(a)ch at the Grassroots: 10-week robotics course",
+    body: "Designed and taught a 10-week programming course for refugee kids in Hong Kong, as part of Operation Santa Claus: a class of 12 across two age groups (under 11 and 11–16). Sourced, funded and customised the hardware, and built the project work around cardboard robotics. Volunteering with Grassroots Future since 2020.",
+    tags: ["COURSE DESIGN", "HARDWARE", "KIDS 6–16"],
+  },
+];
+
+const organising = [
+  {
+    when: "2019–2024",
+    role: "Core Organiser",
+    org: "HONG KONG GOLANG MEETUP GROUP",
+    body: "Core organiser of Hong Kong's Go community for 4+ years.",
+  },
+  {
+    when: "2017–2018",
+    role: "Organiser",
+    org: "THINK HK — UX DESIGN MEETUP",
+    body: "Curated speakers and grew an invite-only mailing list to 100+ subscribers.",
+  },
+  {
+    when: "2014–2018",
+    role: "Co-Organiser",
+    org: "HONG KONG WEB DEVELOPERS (HKWD)",
+    body: "Co-organised one of Hong Kong's web developer communities for 4+ years.",
+  },
+];
+
+const talksUrl = "https://denistsoi.github.io/talks/";
+const codeconf = {
+  year: "2017",
+  title: "From Junior to Senior Developer: Lone Wolf to Wolf Pack",
+  kind: "TALK · CODE CONF HK",
+  href: "https://hongkong.codeconf.io/2017/",
+  body: "What makes a successful senior developer, frameworks to self-evaluate your career progression, and how to form \"packs\" that shape company culture and build sustainable support networks.",
+};
+const talks = [
+  { year: "2017", title: "UI/UX: Mobile First", kind: "TALK · FINHACK", slug: "2017-ux-finhack/" },
+  { year: "2017", title: "Docker Workshop", kind: "WORKSHOP", slug: "2017-devops/" },
+  { year: "2017", title: "Git Workshop", kind: "WORKSHOP", slug: "2017-git/" },
+  { year: "2016", title: "Easy as Pi", kind: "ONGOING PROJECT", slug: "2016-easy-as-pi/" },
+  { year: "2016", title: "Laravel Setup", kind: "TALK", slug: "2016-laravel/" },
+  { year: "2016", title: "Maps", kind: "TALK", slug: "2016-maps/" },
+  { year: "2014", title: "JS 102", kind: "TALK", slug: "2014-js102/" },
+  { year: "2014", title: "Sass", kind: "TALK", slug: "2014-sass" },
+  { year: "2013", title: "WTF CSS3D", kind: "TALK", slug: "2013-wtf-css/" },
+  { year: "2013", title: "WTF Three.js", kind: "TALK", slug: "2013-threejs/" },
 ];
 
 const links = [
@@ -365,11 +427,125 @@ TSOI</h1>
         </div>
       </section>
 
+      <!-- COMMUNITY -->
+      <section id="community" class="wrap sec scan">
+        <div class="sec-head">
+          <span class="sec-num">04</span>
+          <h2>COMMUNITY</h2>
+          <span class="draw ticks"></span>
+          <span class="sec-meta">TEACHING · ORGANISING · SPEAKING</span>
+        </div>
+        <p class="sec-intro">
+          Explaining technology so people can use it is half of forward-deployed
+          work. I've done it outside the day job for over a decade: teaching
+          refugees in Hong Kong, organising the city's developer meetups, and
+          speaking at them.
+        </p>
+        <div class="rv cards">
+          {
+            teaching.map((c, i) => (
+              <article class="card card-wide">
+                <div class="card-head">
+                  <span>{c.label}</span>
+                  <span>{c.years}</span>
+                </div>
+                <div class="card-fig">
+                  <div class={`dimg d${i + 4}`} aria-hidden="true" />
+                  <span class="fig-label">{c.fig}</span>
+                </div>
+                <div class="card-body">
+                  <h3>{c.title}</h3>
+                  <p class="card-text">{c.body}</p>
+                  <div class="tags tags-end">
+                    {c.tags.map((t) => <span>{t}</span>)}
+                  </div>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="rv sub">
+          <div class="sub-head">
+            <span>ORGANISING</span>
+            <span class="sub-rule"></span>
+            <span>2014–2024</span>
+          </div>
+          <article class="card org">
+            <div class="card-fig org-fig">
+              <div class="dimg d6" aria-hidden="true" />
+              <span class="fig-label">FIG. C3 — MEETUP NIGHT</span>
+            </div>
+            <div class="org-list">
+              {
+                organising.map((o) => (
+                  <div class="xrow org-row">
+                    <span class="org-when">{o.when}</span>
+                    <div class="org-main">
+                      <span class="org-role">{o.role}</span>
+                      <span class="org-name">{o.org}</span>
+                      <span>{o.body}</span>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </article>
+        </div>
+
+        <div class="rv sub">
+          <div class="sub-head">
+            <span>SPEAKING</span>
+            <span class="sub-rule"></span>
+            <span>11 TALKS &amp; WORKSHOPS · 2013–2017</span>
+          </div>
+          <article class="talks">
+            <div class="talks-head">
+              <div class="org-main">
+                <span class="talks-role">Speaker</span>
+                <span class="org-name">HONG KONG WEB DEVELOPERS (HKWD) · CODE CONF</span>
+              </div>
+              <a class="ul sec-meta sec-link" href={talksUrl}>
+                ALL SLIDES
+                <svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"
+                  ><path d="M0 5h16M12 1l4 4-4 4"></path></svg
+                >
+              </a>
+            </div>
+            <div class="talk-list">
+              <a class="talk talk-feature" href={codeconf.href}>
+                <span class="talk-year">{codeconf.year}</span>
+                <span class="talk-feature-main">
+                  <span class="talk-title">{codeconf.title}</span>
+                  <span class="talk-desc">{codeconf.body}</span>
+                </span>
+                <span class="talk-kind">{codeconf.kind}</span>
+                <svg width="14" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M0 5h16M12 1l4 4-4 4" />
+                </svg>
+              </a>
+              {
+                talks.map((t) => (
+                  <a class="talk" href={talksUrl + t.slug}>
+                    <span class="talk-year">{t.year}</span>
+                    <span class="talk-title">{t.title}</span>
+                    <span class="talk-kind">{t.kind}</span>
+                    <svg width="14" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                      <path d="M0 5h16M12 1l4 4-4 4" />
+                    </svg>
+                  </a>
+                ))
+              }
+            </div>
+          </article>
+        </div>
+      </section>
+
       <!-- CONTACT -->
       <section id="contact" class="wrap sec scan contact-sec">
         <div class="rv contact">
           <div class="contact-main">
-            <span class="eyebrow">04 — READY TO DEPLOY</span>
+            <span class="eyebrow">05 — READY TO DEPLOY</span>
             <h2>AVAILABLE Q4 2026</h2>
             <p>
               Looking for Forward Deployed Engineer roles at AI and fintech
@@ -638,7 +814,7 @@ TSOI</h1>
       .navf {
         display: flex;
         flex-wrap: wrap;
-        gap: 4px 28px;
+        gap: 4px 22px;
         font-size: 11px;
         letter-spacing: 0.22em;
       }
@@ -693,7 +869,7 @@ TSOI</h1>
           display: none;
         }
       }
-      @media (max-width: 1100px) {
+      @media (max-width: 1240px) {
         .navf {
           display: none !important;
         }
@@ -973,6 +1149,18 @@ TSOI</h1>
         -webkit-mask-image: url(/fig-03.png);
         mask-image: url(/fig-03.png);
       }
+      .d4 {
+        -webkit-mask-image: url(/fig-04.png);
+        mask-image: url(/fig-04.png);
+      }
+      .d5 {
+        -webkit-mask-image: url(/fig-05.png);
+        mask-image: url(/fig-05.png);
+      }
+      .d6 {
+        -webkit-mask-image: url(/fig-06.png);
+        mask-image: url(/fig-06.png);
+      }
       .fig-label {
         position: absolute;
         left: 10px;
@@ -1080,6 +1268,159 @@ TSOI</h1>
         opacity: 1;
       }
 
+      /* Community */
+      .sec-intro {
+        max-width: 640px;
+        font-size: 15px;
+        line-height: 1.75;
+      }
+      .card-wide {
+        flex-basis: 420px;
+      }
+      .card-text {
+        line-height: 1.7;
+      }
+      .tags-end {
+        margin-top: auto;
+      }
+      .sub {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .sub-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 11px;
+        letter-spacing: 0.28em;
+        margin-top: 8px;
+      }
+      .sub-rule {
+        flex: 1;
+        border-top: 1px dashed var(--ink);
+      }
+      .org {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+      .org-fig {
+        flex: 1 1 420px;
+        min-width: 0;
+        border-bottom: 0;
+        border-right: 1px solid var(--ink);
+      }
+      .org-list {
+        flex: 1 1 420px;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .org-row {
+        gap: 4px 20px;
+        padding: 18px 20px;
+      }
+      .org-when {
+        flex: 0 0 96px;
+        font-size: 12px;
+        letter-spacing: 0.2em;
+      }
+      .org-main {
+        flex: 1 1 260px;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .org-role {
+        font-family: var(--display);
+        font-size: 14px;
+        letter-spacing: 0.06em;
+      }
+      .org-name {
+        font-size: 11px;
+        letter-spacing: 0.2em;
+      }
+      .talks {
+        border: 1px solid var(--ink);
+        display: flex;
+        flex-direction: column;
+      }
+      .talks-head {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px 24px;
+        padding: 18px 20px;
+        border-bottom: 1px solid var(--ink);
+      }
+      .talks-head .org-main {
+        flex: 0 1 auto;
+      }
+      .talks-head .sec-link {
+        gap: 10px;
+      }
+      .talks-role {
+        font-family: var(--display);
+        font-size: 16px;
+        letter-spacing: 0.06em;
+      }
+      .talk-list {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .talk {
+        flex: 1 0 max(50%, 300px);
+        min-width: 0;
+        display: flex;
+        align-items: baseline;
+        gap: 16px;
+        padding: 14px 20px;
+        min-height: 44px;
+        border-bottom: 1px dashed var(--ink);
+      }
+      .talk:hover {
+        background: var(--ink);
+        color: var(--ground);
+      }
+      .talk-year {
+        flex: 0 0 44px;
+        font-size: 12px;
+        letter-spacing: 0.2em;
+      }
+      .talk-title {
+        flex: 1 1 auto;
+        font-family: var(--display);
+        font-size: 13px;
+        letter-spacing: 0.06em;
+      }
+      .talk-feature {
+        flex-basis: 100%;
+        flex-wrap: wrap;
+        padding-block: 18px;
+      }
+      .talk-feature-main {
+        flex: 1 1 320px;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .talk-feature .talk-title {
+        font-size: 15px;
+      }
+      .talk-desc {
+        font-size: 13px;
+        line-height: 1.6;
+        max-width: 720px;
+      }
+      .talk-kind {
+        font-size: 10px;
+        letter-spacing: 0.22em;
+      }
+
       /* Contact */
       .contact-sec {
         padding-bottom: 72px;
@@ -1160,6 +1501,11 @@ TSOI</h1>
       .m-on .xrow .mk {
         transition: opacity 0.2s;
       }
+      .m-on .talk {
+        transition:
+          background-color 0.15s,
+          color 0.15s;
+      }
       .m-on .blink {
         animation: blink 1.6s steps(1) infinite;
       }
@@ -1178,6 +1524,33 @@ TSOI</h1>
       }
       .m-on .card:hover .d3 {
         animation: spin 14s linear infinite;
+      }
+      .m-on .card:hover .d4 {
+        animation: float 3s ease-in-out infinite;
+      }
+      .m-on .card:hover .d5 {
+        transform-origin: 50% 92%;
+        animation: wobble 1.2s ease-in-out infinite;
+      }
+      .m-on .card:hover .d6 {
+        animation: pan 4s ease-in-out infinite alternate;
+      }
+      @keyframes pan {
+        from {
+          transform: scale(1.12) translateX(-3%);
+        }
+        to {
+          transform: scale(1.12) translateX(3%);
+        }
+      }
+      @keyframes wobble {
+        0%,
+        100% {
+          transform: rotate(-2.5deg);
+        }
+        50% {
+          transform: rotate(2.5deg);
+        }
       }
       @keyframes float {
         0%,

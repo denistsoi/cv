@@ -34,12 +34,42 @@
 - **2013–2016 — Developer, Seed Alpha, Makible, Imagination** (fintech, e-commerce, digital agency, Hong Kong): Financial research app and chatbot for institutional investors; e-commerce; a touch-table interface for Pacific Place.
 - **2010–2013 — Account Exec → Senior Dealer, Acetop, Chancellor** (precious metals, Hong Kong): Client-facing sales and precious metals OTC dealing before moving into engineering.
 
-## Education & community
+## Community
+
+Explaining technology so people can use it is half of forward-deployed work — done outside the day job for over a decade: teaching refugees in Hong Kong, organising the city's developer meetups, and speaking at them.
+
+### Teaching
+
+- **Te(a)ch at the Grassroots — Grassroots Future / Operation Santa Claus (2025)**: Designed and taught a 10-week programming course for refugee kids in Hong Kong: a class of 12 across two age groups (under 11 and 11–16). Sourced, funded and customised the hardware, and built the project work around cardboard robotics. Volunteering with Grassroots Future since 2020.
+- **Teaching code to refugees — Refugeek, BSD Academy (2018)**: Taught web development to refugees in Hong Kong through BSD Academy's follow-on programme that prepares students for the job market wherever they're resettling next.
+
+### Organising (2014–2024)
+
+- **2019–2024 — Core Organiser, Hong Kong Golang Meetup Group**: Core organiser of Hong Kong's Go community for 4+ years.
+- **2017–2018 — Organiser, Think HK (UX design meetup)**: Curated speakers and grew an invite-only mailing list to 100+ subscribers.
+- **2014–2018 — Co-Organiser, Hong Kong Web Developers (HKWD)**: Co-organised one of Hong Kong's web developer communities for 4+ years.
+
+### Speaking (11 talks & workshops, 2013–2017)
+
+Speaker at Hong Kong Web Developers (HKWD) and Code Conf. [All slides](https://denistsoi.github.io/talks/)
+
+- 2017 — [From Junior to Senior Developer: Lone Wolf to Wolf Pack](https://hongkong.codeconf.io/2017/) (talk, Hong Kong Code Conf, 22 Oct 2017): what makes a successful senior developer, frameworks to self-evaluate career progression, and forming "packs" that shape company culture and build sustainable support networks.
+- 2017 — [UI/UX: Mobile First](https://denistsoi.github.io/talks/2017-ux-finhack/) (talk, FinHack)
+- 2017 — [Docker Workshop](https://denistsoi.github.io/talks/2017-devops/) (workshop)
+- 2017 — [Git Workshop](https://denistsoi.github.io/talks/2017-git/) (workshop)
+- 2016 — [Easy as Pi](https://denistsoi.github.io/talks/2016-easy-as-pi/) (ongoing project)
+- 2016 — [Laravel Setup](https://denistsoi.github.io/talks/2016-laravel/) (talk)
+- 2016 — [Maps](https://denistsoi.github.io/talks/2016-maps/) (talk)
+- 2014 — [JS 102](https://denistsoi.github.io/talks/2014-js102/) (talk)
+- 2014 — [Sass](https://denistsoi.github.io/talks/2014-sass) (talk)
+- 2013 — [WTF CSS3D](https://denistsoi.github.io/talks/2013-wtf-css/) (talk)
+- 2013 — [WTF Three.js](https://denistsoi.github.io/talks/2013-threejs/) (talk)
+
+## Education
 
 - General Assembly alum — first Front-End Web Development course run in Hong Kong
 - Udacity Full Stack Web Developer program (2020)
 - Long-time Stack Overflow contributor
-- Member of Think.HK and Hong Kong Web Dev Group; has spoken on UI/UX and mobile-first development
 
 ## Contact
 
