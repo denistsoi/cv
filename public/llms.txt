@@ -1,27 +1,49 @@
-# Denis Tsoi - Software Engineer & Developer
+# Denis Tsoi — Forward Deployed Engineer
 
-## Professional Summary
-Denis Tsoi is the CTO at preferrd.io, with a strong background in frontend development and fintech. He previously served as a Staff Engineer, Frontend at Mox Bank (Standard Chartered's digital bank), demonstrating expertise in modern banking technology solutions.
+> Forward Deployed Engineer with 10+ years shipping mobile, web and AI products across banks, fintech and startups. Embeds with customers and turns rough specs into systems that run in production for years. Based in Australia (permanent resident, no visa sponsorship needed); available from Q4 2026.
 
-## Career Journey
-Denis made a successful career transition from being a senior dealer at a precious metals brokerage to becoming a full-time, full-stack web developer. This career pivot was driven by his passion for technology, a decision he has never regretted. He's a General Assembly Alumni, having completed the first Front-End Web Development course based in Hong Kong.
+## Looking for
 
-## Notable Achievements
-- **Stack Overflow Contributor**: 11+ years of active participation with 10,442 reputation points, reaching 941k people with contributions
-- **Community Involvement**: Active member of Think.HK and Hong Kong Web Dev Group
-- **Educational Background**: Completed Udacity Full Stack Web Developer program in 2020
+- **Target role**: Forward Deployed Engineer
+- **Also open to**: Solutions / Customer Engineer, Founding Engineer
+- **Best fit**: AI and fintech platforms selling into regulated customers
+- **Work mode**: Remote or on-site, Australia
+- **Languages**: English, Cantonese (limited)
+- **Stack**: TypeScript, React Native, GraphQL, Node, Python, Ollama / LM Studio, AWS / GCP
 
-## Professional Philosophy
-Denis focuses on "working on the difficult and challenging problems," indicating his preference for complex technical challenges and innovative solutions.
+## Why Forward Deployed Engineering
 
-## Online Presence
-- **Personal Website**: dtsoi.com
-- **LinkedIn**: linkedin.com/in/denistsoi
-- **Stack Overflow**: Active contributor with significant community impact
-- **GitHub**: Maintains active development profile
-- **Speaking**: Has given presentations on UI/UX and mobile-first development
+- **Customer-side**: Three years as an account exec and precious metals dealer before engineering. At CoverGo, led the React Native app for a major banking client and built integrations across multiple insurer partners.
+- **Production-grade**: At Mox Bank, release champion for the iOS/Android app, on-call owner for the GraphQL gateway, and technical sign-off across 10+ product teams.
+- **Applied AI**: As Co-Founder/CTO of preferrd.io, built private, local LLM infrastructure on Ollama and LM Studio, and prototyped AI personas as business support tools.
 
-## Location & Connections
-Based in Hong Kong SAR with 500+ professional connections and 2K+ followers, Denis is well-connected within the regional tech community.
+## Selected deployments
 
-Denis represents the modern software engineer who combines technical expertise with business acumen, having successfully transitioned between industries while maintaining a commitment to continuous learning and community contribution.
+- **Private LLM stack — preferrd.io (2025–26)**: Internal apps needed AI without sending data to third parties. Designed and ran local LLM infrastructure; prototyped AI personas as support tools. Outcome: secure, private model deployments and more efficient internal workflows.
+- **Shipping a bank's app — Mox Bank (2020–25)**: A regulated virtual bank releasing iOS/Android across many product teams. Release champion handling cross-team coordination, risk assessment and sign-offs for 10+ teams. Outcome: owned critical releases, cut onboarding crash rates, led GraphQL gateway RCA and observability.
+- **Delivery for a banking client — CoverGo (2018–19)**: An insurtech platform delivering to a major bank and multiple insurer partners. Led the client's React Native app; built user flows and API integrations on a multi-tenant Vue/GraphQL platform. Outcome: core features shipped, performance improved, code standards set for the project.
+
+## Experience
+
+- **2026 — Full-time Dad** (career break, Australia): Planned break; relocated to Australia as a permanent resident. Available from Q4 2026.
+- **2025–2026 — Co-Founder / CTO, preferrd.io** (AI startup, Hong Kong): Led AI-assisted development; built private LLM infrastructure and AI personas for internal workflows.
+- **2020–2025 — Senior → Staff Engineer, Mox Bank** (virtual banking, Hong Kong): Release champion for the iOS/Android app. As Team Lead, ran technical sign-offs across 10+ product teams and mentored engineers. On-call owner for the GraphQL gateway (incidents, RCA, observability). Led React Native for customer onboarding, reducing crash rates.
+- **2018–2019 — Software Engineer, CoverGo** (insurtech, Hong Kong): Led a React Native app for a major banking client; built flows and integrations on a multi-tenant insurance platform.
+- **2018 — Software Engineer, Scribe Intelligence** (AI / speech, Hong Kong): AI-powered audio transcription on Node/Python, AWS/GCP; open-source AI contributions (Gentle).
+- **2016–2018 — Software Engineer, EnergyBox** (IoT / energy, Hong Kong): On-premise IoT energy monitoring and compliance; end-to-end QA for site reliability.
+- **2013–2016 — Developer, Seed Alpha, Makible, Imagination** (fintech, e-commerce, digital agency, Hong Kong): Financial research app and chatbot for institutional investors; e-commerce; a touch-table interface for Pacific Place.
+- **2010–2013 — Account Exec → Senior Dealer, Acetop, Chancellor** (precious metals, Hong Kong): Client-facing sales and precious metals OTC dealing before moving into engineering.
+
+## Education & community
+
+- General Assembly alum — first Front-End Web Development course run in Hong Kong
+- Udacity Full Stack Web Developer program (2020)
+- Long-time Stack Overflow contributor
+- Member of Think.HK and Hong Kong Web Dev Group; has spoken on UI/UX and mobile-first development
+
+## Contact
+
+- [Email](mailto:denistsoi@gmail.com): denistsoi@gmail.com
+- [LinkedIn](https://www.linkedin.com/in/denistsoi): full work history
+- [GitHub](https://denistsoi.github.io/)
+- [Website](https://dtsoi.com)
