@@ -309,17 +309,17 @@ const links = [
             {nav.map((n) => <a class="ul" href={n.href}>{n.label}</a>)}
           </nav>
           <div class="tools">
-            <span class="hclock">SYD <span id="clock">--:--:--</span></span>
-            <button type="button" id="modeBtn" class="btn-line" aria-label="Switch colour mode">
-              <svg width="12" height="12" viewBox="0 0 12 12"
-                ><circle cx="6" cy="6" r="5.25" fill="none" stroke="currentColor" stroke-width="1.5"
-                ></circle><path d="M6 0.75a5.25 5.25 0 0 1 0 10.5z" fill="currentColor"></path></svg
-              ><span id="modeLabel">LIGHT</span>
-            </button>
-            <a class="hbadge btn-line" href="#contact">
+            <a class="hbadge ul" href="#contact">
               <span class="blink sq"></span>
               <span>AVAILABLE Q4 2026</span>
             </a>
+            <span class="hclock">SYD <span id="clock">--:--:--</span></span>
+            <button type="button" id="modeBtn" class="btn-line btn-icon" aria-label="Switch to light mode" title="Switch to light mode">
+              <svg width="14" height="14" viewBox="0 0 12 12" aria-hidden="true"
+                ><circle cx="6" cy="6" r="5.25" fill="none" stroke="currentColor" stroke-width="1.5"
+                ></circle><path d="M6 0.75a5.25 5.25 0 0 1 0 10.5z" fill="currentColor"></path></svg
+              >
+            </button>
             <details class="navc">
               <summary class="btn-line">
                 <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5"
@@ -696,10 +696,11 @@ TSOI</h1>
       // Light / dark toggle (remembered per visitor)
       const root = document.documentElement;
       const btn = document.getElementById("modeBtn");
-      const label = document.getElementById("modeLabel");
       const apply = (light: boolean) => {
         root.classList.toggle("light", light);
-        if (label) label.textContent = light ? "DARK" : "LIGHT";
+        const next = `Switch to ${light ? "dark" : "light"} mode`;
+        btn?.setAttribute("aria-label", next);
+        btn?.setAttribute("title", next);
       };
       apply(root.classList.contains("light"));
       btn?.addEventListener("click", () => {
@@ -851,11 +852,11 @@ TSOI</h1>
       }
       .topbar-in {
         display: flex;
-        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 12px 20px;
+        gap: 20px;
         min-height: 64px;
+        white-space: nowrap;
       }
       .brand {
         display: flex;
@@ -871,13 +872,13 @@ TSOI</h1>
         letter-spacing: 0.16em;
       }
       .hsub {
+        display: none;
         font-size: 11px;
         letter-spacing: 0.24em;
       }
       .navf {
         display: flex;
-        flex-wrap: wrap;
-        gap: 4px 22px;
+        gap: 22px;
         font-size: 11px;
         letter-spacing: 0.22em;
       }
@@ -887,8 +888,7 @@ TSOI</h1>
       .tools {
         display: flex;
         align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
+        gap: 18px;
       }
       .hclock {
         font-size: 11px;
@@ -896,7 +896,17 @@ TSOI</h1>
         padding: 0 6px;
       }
       .hbadge {
+        display: inline-flex;
+        align-items: center;
         gap: 10px;
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        padding: 12px 0;
+      }
+      .btn-icon {
+        width: 44px;
+        padding: 0;
+        justify-content: center;
       }
       .navc {
         display: none;
@@ -927,17 +937,22 @@ TSOI</h1>
       .navc-menu a:last-child {
         border-bottom: 0;
       }
-      @media (max-width: 1600px) {
-        .hsub {
-          display: none;
-        }
-      }
-      @media (max-width: 1240px) {
+      /* Collapse to the MENU button before the full nav would crowd the bar;
+         the freed space shows the role next to the name instead. */
+      @media (max-width: 1440px) {
         .navf {
           display: none !important;
         }
         .navc {
           display: block;
+        }
+        .hsub {
+          display: block;
+        }
+      }
+      @media (max-width: 860px) {
+        .hsub {
+          display: none;
         }
       }
       @media (max-width: 600px) {
