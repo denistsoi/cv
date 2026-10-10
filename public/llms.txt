@@ -73,7 +73,7 @@ Speaker at Hong Kong Web Developers (HKWD), Code Conf HK, Women Who Code HK and 
 
 ## Contact
 
-- [Email](mailto:denistsoi@gmail.com): denistsoi@gmail.com
+- [Email](mailto:hello@dtsoi.com): hello@dtsoi.com
 - [LinkedIn](https://www.linkedin.com/in/denistsoi): full work history
 - [GitHub](https://denistsoi.github.io/)
 - [Website](https://dtsoi.com)

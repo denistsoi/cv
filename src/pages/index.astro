@@ -3,7 +3,9 @@ const title = "Denis Tsoi — Forward Deployed Engineer";
 const description =
   "Denis Tsoi — Forward Deployed Engineer. 10+ years shipping mobile, web and AI products across banks, fintech and startups. Based in Australia (PR), available Q4 2026.";
 
-const email = "denistsoi@gmail.com";
+// Split so the full address never appears in the HTML; assembled client-side.
+const emailUser = "hello";
+const emailDomain = "dtsoi.com";
 const linkedin = "https://www.linkedin.com/in/denistsoi";
 
 const nav = [
@@ -257,7 +259,7 @@ const talks = [
 ];
 
 const links = [
-  { k: "EMAIL", v: email.toUpperCase(), href: `mailto:${email}` },
+  { k: "EMAIL", v: "HELLO AT DTSOI.COM", href: "#contact", email: true },
   { k: "LINKEDIN", v: "/IN/DENISTSOI", href: linkedin },
   { k: "GITHUB", v: "DENISTSOI.GITHUB.IO", href: "https://denistsoi.github.io/" },
   { k: "WEB", v: "DTSOI.COM", href: "https://dtsoi.com" },
@@ -394,7 +396,7 @@ TSOI</h1>
               ))
             }
           </div>
-          <a href={`mailto:${email}`} class="btn btn-solid btn-block">
+          <a href="#contact" data-u={emailUser} data-d={emailDomain} class="btn btn-solid btn-block">
             BOOK AN INTRO CALL
             <svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.5"
               ><path d="M0 5h16M12 1l4 4-4 4"></path></svg
@@ -615,7 +617,7 @@ TSOI</h1>
               platforms. Got a customer with a rough spec? I'll get it to
               production.
             </p>
-            <a href={`mailto:${email}`} class="btn btn-inv">
+            <a href="#contact" data-u={emailUser} data-d={emailDomain} class="btn btn-inv">
               EMAIL ME
               <svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.5"
                 ><path d="M0 5h16M12 1l4 4-4 4"></path></svg
@@ -625,9 +627,14 @@ TSOI</h1>
           <div class="contact-links">
             {
               links.map((l) => (
-                <a class="ul" href={l.href}>
+                <a
+                  class="ul"
+                  href={l.href}
+                  data-u={l.email && emailUser}
+                  data-d={l.email && emailDomain}
+                >
                   <span>{l.k}</span>
-                  <span>{l.v}</span>
+                  <span data-email-text={l.email}>{l.v}</span>
                 </a>
               ))
             }
@@ -646,6 +653,14 @@ TSOI</h1>
 
     <script>
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Assemble email links (kept out of the HTML to deter scrapers)
+      document.querySelectorAll<HTMLAnchorElement>("a[data-u][data-d]").forEach((a) => {
+        const addr = `${a.dataset.u}@${a.dataset.d}`;
+        a.href = `mailto:${addr}`;
+        const text = a.querySelector<HTMLElement>("[data-email-text]");
+        if (text) text.textContent = addr.toUpperCase();
+      });
 
       // Sydney clock
       const clock = document.getElementById("clock");
