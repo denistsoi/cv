@@ -49,12 +49,13 @@ Explaining technology so people can use it is half of forward-deployed work — 
 - **2017–2018 — Organiser, Think HK (UX design meetup)**: Curated speakers and grew an invite-only mailing list to 100+ subscribers.
 - **2014–2018 — Co-Organiser, Hong Kong Web Developers (HKWD)**: Co-organised one of Hong Kong's web developer communities for 4+ years.
 
-### Speaking (11 talks & workshops, 2013–2017)
+### Speaking (12 talks & workshops, 2013–2025)
 
-Speaker at Hong Kong Web Developers (HKWD), Code Conf HK, Women Who Code HK and FinHack. [All slides](https://denistsoi.github.io/talks/)
+Speaker at HK Web Dev, Hong Kong Web Developers (HKWD), Code Conf HK, Women Who Code HK and FinHack. [All slides](https://denistsoi.github.io/talks/)
 
+- 2025 — [It Depends: Beyond Vibe Coding](https://www.meetup.com/hk-web-dev/events/308270309/?eventOrigin=group_events_list) (talk, HK Web Dev, 19 Aug 2025): why AI development needs more than intuition, how business requirements, data constraints and user needs shape the solution, and the hidden infrastructure, scalability and maintenance work behind it.
 - 2017 — [From Junior to Senior Developer: Lone Wolf to Wolf Pack](https://hongkong.codeconf.io/2017/) (talk, Hong Kong Code Conf, 22 Oct 2017): what makes a successful senior developer, frameworks to self-evaluate career progression, and forming "packs" that shape company culture and build sustainable support networks.
-- 2017 — [UI/UX: Mobile First](https://denistsoi.github.io/talks/2017-ux-finhack/) (talk, FinHack): from skeuomorphism to flat design, principles for good mobile and desktop UX, and when to break the rules, for hackathon teams in fintech, insurance and regtech.
+- 2017 — [UI/UX: Mobile First](https://denistsoi.github.io/talks/2017-ux-finhack/) (talk, Société Générale FinHack): from skeuomorphism to flat design, principles for good mobile and desktop UX, and when to break the rules, for hackathon teams at Société Générale's fintech hackathon.
 - 2017 — [Docker Workshop](https://denistsoi.github.io/talks/2017-devops/) (workshop): hands-on from hello-world to networked containers, Docker Compose, and scaling a service across a Docker Swarm.
 - 2017 — [Git Workshop](https://denistsoi.github.io/talks/2017-git/) (workshop, EnergyBox): Git from the terminal for the team: init, clone, commit, amend, reset, remotes and tagging releases.
 - 2016 — [Easy as Pi](https://denistsoi.github.io/talks/2016-easy-as-pi/) (ongoing project): DevOps 101 on a Raspberry Pi cluster: building the rig, ARM distros like Hypriot, and untangling Docker, Kubernetes and orchestration jargon.

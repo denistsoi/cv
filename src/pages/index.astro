@@ -178,20 +178,27 @@ const organising = [
 ];
 
 const talksUrl = "https://denistsoi.github.io/talks/";
-const codeconf = {
-  year: "2017",
-  title: "From Junior to Senior Developer: Lone Wolf to Wolf Pack",
-  kind: "TALK · CODE CONF HK",
-  href: "https://hongkong.codeconf.io/2017/",
-  body: "What makes a successful senior developer, frameworks to self-evaluate your career progression, and how to form \"packs\" that shape company culture and build sustainable support networks.",
-};
 const talks = [
+  {
+    year: "2025",
+    title: "It Depends: Beyond Vibe Coding",
+    kind: "TALK · HK WEB DEV",
+    href: "https://www.meetup.com/hk-web-dev/events/308270309/?eventOrigin=group_events_list",
+    desc: "Why AI development needs more than intuition: how business requirements, data constraints and user needs shape the solution, and the hidden infrastructure, scalability and maintenance work behind it.",
+  },
+  {
+    year: "2017",
+    title: "From Junior to Senior Developer: Lone Wolf to Wolf Pack",
+    kind: "TALK · CODE CONF HK",
+    href: "https://hongkong.codeconf.io/2017/",
+    desc: "What makes a successful senior developer, frameworks to self-evaluate your career progression, and how to form \"packs\" that shape company culture and build sustainable support networks.",
+  },
   {
     year: "2017",
     title: "UI/UX: Mobile First",
     kind: "TALK · FINHACK",
     slug: "2017-ux-finhack/",
-    desc: "From skeuomorphism to flat design, principles for good mobile and desktop UX, and when to break the rules, for hackathon teams in fintech, insurance and regtech.",
+    desc: "From skeuomorphism to flat design, principles for good mobile and desktop UX, and when to break the rules, for hackathon teams at Société Générale's fintech hackathon.",
   },
   {
     year: "2017",
@@ -559,7 +566,7 @@ TSOI</h1>
           <div class="sub-head">
             <span>SPEAKING</span>
             <span class="sub-rule"></span>
-            <span>11 TALKS &amp; WORKSHOPS · 2013–2017</span>
+            <span>12 TALKS &amp; WORKSHOPS · 2013–2025</span>
           </div>
           <article class="talks">
             <div class="talks-head">
@@ -575,20 +582,9 @@ TSOI</h1>
               </a>
             </div>
             <div class="talk-list">
-              <a class="talk talk-feature" href={codeconf.href}>
-                <span class="talk-year">{codeconf.year}</span>
-                <span class="talk-main">
-                  <span class="talk-title">{codeconf.title}</span>
-                  <span class="talk-desc">{codeconf.body}</span>
-                </span>
-                <span class="talk-kind">{codeconf.kind}</span>
-                <svg width="14" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                  <path d="M0 5h16M12 1l4 4-4 4" />
-                </svg>
-              </a>
               {
                 talks.map((t) => (
-                  <a class="talk" href={talksUrl + t.slug}>
+                  <a class="talk" href={t.href ?? talksUrl + t.slug}>
                     <span class="talk-year">{t.year}</span>
                     <span class="talk-main">
                       <span class="talk-title">{t.title}</span>
@@ -974,6 +970,28 @@ TSOI</h1>
         .hclock,
         .hbadge {
           display: none !important;
+        }
+        /* Hover marker is invisible but still reserves width on mobile */
+        .xrow .mk {
+          display: none;
+        }
+        /* Hero rule row: stack the two labels, drop the ticks that have no room */
+        .rule-row {
+          flex-wrap: wrap;
+          row-gap: 6px;
+        }
+        .rule-row .ticks {
+          display: none;
+        }
+        .rule-row span {
+          white-space: nowrap;
+        }
+        /* Tighten the date-to-title gap on mobile */
+        .xrow {
+          row-gap: 2px;
+        }
+        .x-role {
+          line-height: 1.2;
         }
       }
 
@@ -1490,10 +1508,6 @@ TSOI</h1>
         font-size: 13px;
         letter-spacing: 0.06em;
       }
-      .talk-feature {
-        flex-basis: 100%;
-      }
-
       .talk-main {
         flex: 1 1 200px;
         min-width: 0;
@@ -1501,20 +1515,11 @@ TSOI</h1>
         flex-direction: column;
         gap: 6px;
       }
-      .talk-feature .talk-main {
-        flex-basis: 320px;
-      }
-      .talk-feature .talk-title {
-        font-size: 15px;
-      }
       .talk-desc {
         font-size: 12px;
         line-height: 1.6;
         letter-spacing: 0.02em;
         max-width: 720px;
-      }
-      .talk-feature .talk-desc {
-        font-size: 13px;
       }
       .talk-kind {
         font-size: 10px;
@@ -1744,6 +1749,19 @@ TSOI</h1>
         .m-on *::after {
           animation: none !important;
           transition: none !important;
+        }
+      }
+      /* Narrow phones (320px): keep headings and header tools inside the viewport.
+         Kept last so it overrides the base heading and header rules above. */
+      @media (max-width: 360px) {
+        .tools {
+          gap: 10px;
+        }
+        .sec-head h2 {
+          font-size: 22px;
+        }
+        .contact-main h2 {
+          font-size: 24px;
         }
       }
     </style>
